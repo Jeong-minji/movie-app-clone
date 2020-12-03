@@ -1,6 +1,7 @@
-import React from 'react';
-import axios from 'axios';
-import Movie from './Movie';
+import React from "react";
+import axios from "axios";
+import Movie from "./Movie";
+import "./App.css";
 
 class App extends React.Component {
   state = {
@@ -20,22 +21,25 @@ class App extends React.Component {
   render() {
     const { isLoading, movies } = this.state;
     return (
-      <section class="container">
+      <section className="container">
         { isLoading ? (
-          <div class="loader">
-            <span class="loader__text">Loading...</span>
+          <div className="loader">
+            <span className="loader__text">Loading...</span>
           </div>
         ) : (
-          movies.map(movie => (       // 로딩중이면 "Loading", 아니면 Movie 변수들 가져오기
-            <Movie 
-              key={movie.id}
-              id={movie.id} 
-              year={movie.year} 
-              title={movie.title} 
-              summary={movie.summary} 
-              poster={movie.medium_cover_image}   
-            />
-          ))
+          <div className="movies">
+            {movies.map(movie => (       // 로딩중이면 "Loading", 아니면 Movie 변수들 가져오기
+              <Movie 
+                key={movie.id}
+                id={movie.id} 
+                year={movie.year} 
+                title={movie.title} 
+                summary={movie.summary} 
+                poster={movie.medium_cover_image}   
+                genres={movie.genres}
+              />
+            ))}
+          </div>
         )}
       </section>
     );
